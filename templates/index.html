@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Playlist to MP3 Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <br>
+        <h1>Spotify Playlist to MP3 Downloader</h1>
+        <form action="{{ url_for('download') }}" method="post">
+            <div class="form-group">
+                <label for="playlist_link">Enter Spotify Playlist Link:</label>
+                <input type="text" id="playlist_link" name="playlist_link" required>
+            </div>
+            <button type="submit">Download MP3s</button>
+            <br>
+            <br>
+            <br><br>
+        </form>
+    </div>
+    <div class="notification" id="notification">Successfully downloaded songs!</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const notification = document.getElementById('notification');
+            {% if message %}
+            notification.textContent = "{{ message }}";
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+            {% endif %}
+        });
+    </script>
+</body>
+</html>
